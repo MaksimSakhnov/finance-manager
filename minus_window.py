@@ -5,11 +5,11 @@ from database import add_operation
 from datetime import timedelta, datetime
 
 
-class add_window():
+class minus_window():
     def __init__(self, parent):
         self.root = tk.Toplevel(parent)
         # установка названия приложения
-        self.root.title("Добавить доход")
+        self.root.title("Добавить расход")
         # вычисляем высоту, ширину экрана
         monitor_height = self.root.winfo_screenheight()
         monitor_width = self.root.winfo_screenwidth()
@@ -24,22 +24,27 @@ class add_window():
 
         self.grab_focus()
 
-    #рисуем виджеты
+    # рисуем виджеты
     def draw_widgets(self):
         tk.Label(self.root, text="Сумма").grid(row=0, column=0, ipadx=20)
-        #поле ввода Entry
+        # поле ввода Entry
         self.sum = tk.Entry(self.root)
         self.sum.grid(row=0, column=1, ipadx=20, stick='ew')
 
         tk.Label(self.root, text="Тип").grid(row=1, column=0, ipadx=20)
-        #выпадающий список
-        self.type = Combobox(self.root, values=('Зарплата',
-                                                'Инвестиции',
-                                                'Другое'))
+        # выпадающий список
+        self.type = Combobox(self.root, values=('Еда',
+                                                'Образование',
+                                                'Развлечения',
+                                                'Связь и интернет',
+                                                'Одежда',
+                                                'Техника',
+                                                'Транспорт',
+                                                'Другое',))
         self.type.grid(row=1, column=1, ipadx=20, stick='ew')
 
         tk.Label(self.root, text="Дата").grid(row=2, column=0, ipadx=20)
-        #отдельный элемент, календарь, в котором мы можем выбирать дату
+        # отдельный элемент, календарь, в котором мы можем выбирать дату
         self.cal = DateEntry(self.root, selectmode='day')
         self.cal.grid(row=2, column=1, ipadx=20, stick='ew')
 
@@ -50,7 +55,7 @@ class add_window():
         temp_sum = self.sum.get()
         temp_type = self.type.get()
         temp_date = self.cal.get_date()
-        add_operation(1, temp_sum,temp_type, temp_date)
+        add_operation(2, temp_sum, temp_type, temp_date)
         print(temp_sum, temp_type, temp_date)
         self.root.destroy()
 
